@@ -7,6 +7,7 @@ import ac.unindra.roemah_duren_spring.dto.request.QueryRequest;
 import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.JasperService;
 import ac.unindra.roemah_duren_spring.service.SupplierService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -40,14 +41,25 @@ public class SupplierController implements Initializable {
 
     private final SupplierService supplierService;
     private final JasperService jasperService;
+    private final UserService userService;
 
     public SupplierController() {
         this.supplierService = JavaFxApplication.getBean(SupplierService.class);
         this.jasperService = JavaFxApplication.getBean(JasperService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        buttonModalAdd.setDisable(true);
+                        tableSupplier.setDisable(true);
+                    }
+                },
+                error -> handleErrorResponse(error.getMessage()));
+
         setupButtonIcons();
         initTableData();
         handlePagination();

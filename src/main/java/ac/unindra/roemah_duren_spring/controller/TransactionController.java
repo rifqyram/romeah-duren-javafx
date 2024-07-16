@@ -8,6 +8,7 @@ import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Customer;
 import ac.unindra.roemah_duren_spring.model.Transaction;
 import ac.unindra.roemah_duren_spring.service.TransactionService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.CurrencyUtil;
 import ac.unindra.roemah_duren_spring.util.FXMLUtil;
 import ac.unindra.roemah_duren_spring.util.NotificationUtil;
@@ -41,15 +42,26 @@ public class TransactionController implements Initializable {
     public TableColumn<Transaction, Long> totalPriceCol;
     public TableColumn<Transaction, Void> actionsCol;
 
-    private final TransactionService transactionService;
     public Button printModalBtn;
+    private final TransactionService transactionService;
+    private final UserService userService;
 
     public TransactionController() {
         this.transactionService = JavaFxApplication.getBean(TransactionService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        buttonModalAdd.setDisable(true);
+                    }
+                },
+                error -> FXMLUtil.updateUI(() -> NotificationUtil.showNotificationError(main, error.getMessage()))
+        );
+
         setupButtonIcons();
         initTables();
         handlePagination();

@@ -7,6 +7,7 @@ import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.BranchService;
 import ac.unindra.roemah_duren_spring.service.JasperService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,13 +43,26 @@ public class BranchController implements Initializable {
     public Button printReport;
     public TextField searchField;
 
+    private final UserService userService;
+
     public BranchController() {
         this.jasperService = JavaFxApplication.getBean(JasperService.class);
         this.branchService = JavaFxApplication.getBean(BranchService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        buttonModalAdd.setDisable(true);
+                        tableBranch.setDisable(true);
+                    }
+                },
+                error -> handleErrorResponse(error.getMessage())
+        );
+
         setupButtonIcons();
         initTableData();
         handlePagination();

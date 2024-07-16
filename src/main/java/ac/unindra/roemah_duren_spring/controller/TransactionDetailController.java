@@ -19,6 +19,7 @@ import org.kordamp.ikonli.material2.Material2OutlinedAL;
 import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TransactionDetailController implements Initializable {
@@ -153,6 +154,7 @@ public class TransactionDetailController implements Initializable {
         Map<String, Object> map = new HashMap<>();
         map.put("DARI", from);
         map.put("KIRIM_KE", to);
+        map.put("TANGGAL_TTD", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         map.put("KODE_TRANSAKSI", selectedTransaction.getId().split("-")[0]);
         map.put("TIPE_TRANSAKSI", selectedTransaction.getTransactionType());
 
@@ -177,6 +179,7 @@ public class TransactionDetailController implements Initializable {
 
         String to = selectedTransaction.getBranch().getName();
         Map<String, Object> map = new HashMap<>();
+        map.put("TANGGAL_TTD", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         map.put("KIRIM_KE", to);
         map.put("KODE_TRANSAKSI", selectedTransaction.getId().split("-")[0]);
         map.put("TIPE_TRANSAKSI", selectedTransaction.getTransactionType());
@@ -204,6 +207,7 @@ public class TransactionDetailController implements Initializable {
 
         String to = selectedTransaction.getCustomer() != null ? selectedTransaction.getCustomer().getName() : "Guest";
         Map<String, Object> map = new HashMap<>();
+        map.put("TANGGAL_TTD", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         map.put("KIRIM_KE", to);
         map.put("KODE_TRANSAKSI", selectedTransaction.getId().split("-")[0]);
         map.put("TIPE_TRANSAKSI", selectedTransaction.getTransactionType());

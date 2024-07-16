@@ -34,6 +34,7 @@
 	<parameter name="TANGGAL" class="java.lang.String"/>
 	<parameter name="TOTAL_PRICE" class="java.lang.String"/>
 	<parameter name="DARI" class="java.lang.String"/>
+	<parameter name="TANGGAL_TTD" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -146,6 +147,22 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="146" splitType="Stretch"/>
+		<band height="210" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="120" width="264" height="20" uuid="8d837a40-63a5-4b4d-86bb-6399da2798c7"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Owner"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="100" width="264" height="20" uuid="f8f49ce3-c440-4548-a4ca-6be90634d372"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Jakarta, " + $P{TANGGAL_TTD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="190" width="264" height="20" uuid="3cddb64b-5200-4b54-9e79-dc849e1093c6"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Diaz Subagja"]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

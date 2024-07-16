@@ -7,6 +7,7 @@ import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Product;
 import ac.unindra.roemah_duren_spring.model.Stock;
 import ac.unindra.roemah_duren_spring.service.StockService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.AlertUtil;
 import ac.unindra.roemah_duren_spring.util.FXMLUtil;
 import ac.unindra.roemah_duren_spring.util.NotificationUtil;
@@ -38,13 +39,25 @@ public class StockController implements Initializable {
     public Pagination pagination;
 
     private final StockService stockService;
+    private final UserService userService;
 
     public StockController() {
         this.stockService = JavaFxApplication.getBean(StockService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        buttonModalAdd.setDisable(true);
+                        tableStock.setDisable(true);
+                    }
+                },
+                error -> handleErrorResponse(error.getMessage())
+        );
+
         setupButtonIcons();
         initTableData();
         handlePagination();

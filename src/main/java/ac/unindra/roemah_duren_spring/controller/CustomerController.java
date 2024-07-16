@@ -7,6 +7,7 @@ import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Customer;
 import ac.unindra.roemah_duren_spring.service.CustomerService;
 import ac.unindra.roemah_duren_spring.service.JasperService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -39,14 +40,27 @@ public class CustomerController implements Initializable {
     public Button printReport;
     private final CustomerService customerService;
     private final JasperService jasperService;
+    private final UserService userService;
 
     public CustomerController() {
         this.customerService = JavaFxApplication.getBean(CustomerService.class);
         this.jasperService = JavaFxApplication.getBean(JasperService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        buttonModalAdd.setDisable(true);
+                        tableCustomer.setDisable(true);
+                    }
+                },
+                error -> FXMLUtil.updateUI(() -> NotificationUtil.showNotificationError(main, error.getMessage()))
+        );
+
+
         setupButtonIcons();
         initTableData();
         handlePagination();

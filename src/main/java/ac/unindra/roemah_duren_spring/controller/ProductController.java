@@ -11,6 +11,7 @@ import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.JasperService;
 import ac.unindra.roemah_duren_spring.service.ProductService;
 import ac.unindra.roemah_duren_spring.service.StockService;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.TableUtil;
 import ac.unindra.roemah_duren_spring.util.*;
 import javafx.fxml.Initializable;
@@ -46,15 +47,27 @@ public class ProductController implements Initializable {
     private final ProductService productService;
     private final StockService stockService;
     private final JasperService jasperService;
+    private final UserService userService;
 
     public ProductController() {
         this.productService = JavaFxApplication.getBean(ProductService.class);
         this.stockService = JavaFxApplication.getBean(StockService.class);
         this.jasperService = JavaFxApplication.getBean(JasperService.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userService.getUserInfoByToken(
+                response -> {
+                    if (response.getRoles().contains("Owner")) {
+                        btnOpenModal.setDisable(true);
+                        tableProduct.setDisable(true);
+                    }
+                },
+                error -> handleErrorResponse(error.getMessage())
+        );
+
         setupButtonIcons();
         initTableData();
         handleSearch();

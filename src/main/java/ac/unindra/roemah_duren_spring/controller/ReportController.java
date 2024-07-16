@@ -116,7 +116,7 @@ public class ReportController implements Initializable {
 
         for (Transaction transaction : transactions) {
             Map<String, Object> data = new HashMap<>();
-            long sum = transaction.getTransactionDetails().stream().mapToLong(transactionDetail -> transactionDetail.getQty() * transactionDetail.getPrice()).sum();
+            data.put("kodeTransaksi", "#" + transaction.getId().split("-")[0]);
             data.put("branch", transaction.getBranch().getName());
             data.put("targetBranchName", transaction.getTargetBranch().getName());
 
@@ -151,6 +151,7 @@ public class ReportController implements Initializable {
         for (Transaction transaction : transactions) {
             Map<String, Object> data = new HashMap<>();
             long sum = transaction.getTransactionDetails().stream().mapToLong(transactionDetail -> transactionDetail.getQty() * transactionDetail.getPrice()).sum();
+            data.put("kodeTransaksi", "#" + transaction.getId().split("-")[0]);
             data.put("branch", transaction.getBranch().getName());
             data.put("customerName", transaction.getCustomer() != null ? transaction.getCustomer().getName() : "Guest");
             data.put("totalPerBranch", CurrencyUtil.formatCurrencyIDR(sum));
@@ -190,6 +191,7 @@ public class ReportController implements Initializable {
         for (Transaction transaction : transactions) {
             Map<String, Object> data = new HashMap<>();
             long sum = transaction.getTransactionDetails().stream().mapToLong(transactionDetail -> transactionDetail.getQty() * transactionDetail.getPrice()).sum();
+            data.put("kodeTransaksi", "#" + transaction.getId().split("-")[0]);
             data.put("branch", transaction.getBranch().getName());
             data.put("totalPerBranch", CurrencyUtil.formatCurrencyIDR(sum));
 
