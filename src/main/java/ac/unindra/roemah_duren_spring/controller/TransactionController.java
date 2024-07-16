@@ -3,6 +3,7 @@ package ac.unindra.roemah_duren_spring.controller;
 import ac.unindra.roemah_duren_spring.JavaFxApplication;
 import ac.unindra.roemah_duren_spring.constant.ConstantPage;
 import ac.unindra.roemah_duren_spring.dto.request.QueryRequest;
+import ac.unindra.roemah_duren_spring.model.Admin;
 import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Customer;
 import ac.unindra.roemah_duren_spring.model.Transaction;
@@ -33,6 +34,7 @@ public class TransactionController implements Initializable {
     public Pagination pagination;
     public TableView<Transaction> tableTransaction;
     public TableColumn<Transaction, Integer> noCol;
+    public TableColumn<Transaction, Admin> adminCol;
     public TableColumn<Transaction, Branch> branchCol;
     public TableColumn<Transaction, String> transDateCol;
     public TableColumn<Transaction, String> transTypeCol;
@@ -57,6 +59,9 @@ public class TransactionController implements Initializable {
     private void initTables() {
         TableUtil.setColumnResizePolicy(tableTransaction);
         TableUtil.setTableSequence(noCol);
+
+        adminCol.setCellValueFactory(new PropertyValueFactory<>("admin"));
+        adminCol.setCellFactory(col -> TableUtil.setTableObject(Admin::getEmail));
 
         branchCol.setCellValueFactory(new PropertyValueFactory<>("branch"));
         branchCol.setCellFactory(col -> TableUtil.setTableObject(Branch::getName));

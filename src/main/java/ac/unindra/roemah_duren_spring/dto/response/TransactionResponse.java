@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Builder
 public class TransactionResponse {
     private String id;
+    private AdminResponse admin;
     private CustomerResponse customer;
     private BranchResponse branch;
     private BranchResponse targetBranch;
@@ -25,6 +26,7 @@ public class TransactionResponse {
     public Transaction toTransaction() {
         Transaction transaction = new Transaction();
         transaction.setId(id);
+        transaction.setAdmin(admin.toAdmin());
         transaction.setCustomer(customer != null ? customer.toCustomer() : null);
         transaction.setBranch(branch.toBranch());
         transaction.setTargetBranch(targetBranch != null ? targetBranch.toBranch() : null);

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="supplier" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea5e7172-a260-4af2-8ab0-cef23d07ac93">
+	<parameter name="tanggalWaktu" class="java.lang.String"/>
+	<parameter name="tanggal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="no" class="java.lang.String"/>
+	<field name="customerName" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="mobilePhoneNo" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="390" y="20" width="150" height="99" uuid="fb80d1b2-ccfe-403e-a1e9-d9c7c81a833c"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PELANGGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="20" width="160" height="30" uuid="7edcca3d-72a6-4a8a-b1cf-83b726d38efc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Roemah Duren]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="60" width="210" height="39" uuid="7fa69343-ab7e-40c4-bdc3-67cd32903d2e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Jln Gg. Bina Warga II No.26 3, RT.3/RW.2, Lubang Buaya, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13810]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="100" width="210" height="19" uuid="c196d8ab-958c-45af-90e0-79c3553ba674"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[P : 0896-3599-3475]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="18" width="40" height="20" uuid="26186c8e-6375-484b-97bd-73439df72ae4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca87fb80-ce29-43b1-8dfe-76fb1d3b803c"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="18" width="98" height="20" uuid="f0576675-8383-414b-b879-110f13d2e71b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca87fb80-ce29-43b1-8dfe-76fb1d3b803c"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="18" width="130" height="20" uuid="27603238-1b11-4274-9dbd-529acf925dd6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca87fb80-ce29-43b1-8dfe-76fb1d3b803c"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Pelanggan]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="39" width="520" height="1" uuid="e1da725e-fb02-45f4-963d-dedbd63fa45b"/>
+			</line>
+			<staticText>
+				<reportElement x="430" y="18" width="110" height="20" uuid="98e477ff-c231-4cd2-a6a3-644f44e167f0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca87fb80-ce29-43b1-8dfe-76fb1d3b803c"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nomor Telepon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="18" width="100" height="20" uuid="6a2c96ba-4003-443b-82c9-d871eab829e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca87fb80-ce29-43b1-8dfe-76fb1d3b803c"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="20" y="22" width="520" height="1" uuid="689868bc-8012-4a36-9f87-29046fa2f975"/>
+			</line>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="20" y="3" width="40" height="20" uuid="9c2b122f-d33d-48ac-9750-f4a08dfd7e39"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="70" y="3" width="130" height="20" uuid="264124fa-fea9-4f29-aed5-4b2a8a009073"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="212" y="3" width="98" height="20" uuid="cc34f558-aa81-475f-97a6-d122ad15bfc3"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="430" y="3" width="110" height="20" uuid="507b3469-0784-41c4-92bb-1a7aa222ad40"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{mobilePhoneNo}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont">
+				<reportElement x="320" y="3" width="100" height="20" uuid="ddce9403-f5f2-4bb1-b550-d4376ee18603"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="66">
+			<textField>
+				<reportElement x="370" y="40" width="164" height="26" uuid="5f2fa464-d259-4ec6-a367-27b093c2cc6e"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{tanggalWaktu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="210" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="120" width="264" height="20" uuid="fe7c36e2-0a1f-4a8c-bdfa-908f31b8776b"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Owner"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="100" width="264" height="20" uuid="346b3b38-2398-46a4-ac54-f43760603da7"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Jakarta, " + $P{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="190" width="264" height="20" uuid="7379f6d4-6dbb-41cb-97f7-c5d1ee0e9bac"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Diaz Subagja"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

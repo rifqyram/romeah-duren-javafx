@@ -6,7 +6,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -153,7 +156,38 @@
       </VBox>
       <VBox HBox.hgrow="ALWAYS">
          <children>
-            <ScrollPane fx:id="contentBox" fitToHeight="true" fitToWidth="true" prefHeight="204.0" prefWidth="570.0" VBox.vgrow="ALWAYS" />
+            <HBox prefHeight="65.0" prefWidth="970.0">
+               <children>
+                  <GridPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="12.0" top="12.0" />
+                     </HBox.margin>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label fx:id="adminName" text="Anonymous" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="12.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="roleAdmin" text="Role" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="8.0" right="12.0" top="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <ScrollPane fx:id="contentBox" fitToHeight="true" fitToWidth="true" prefHeight="666.0" prefWidth="970.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </HBox>

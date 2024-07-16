@@ -4,11 +4,11 @@ import ac.unindra.roemah_duren_spring.JavaFxApplication;
 import ac.unindra.roemah_duren_spring.constant.ConstantPage;
 import ac.unindra.roemah_duren_spring.dto.request.QueryRequest;
 import ac.unindra.roemah_duren_spring.model.Branch;
+import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.BranchService;
-import ac.unindra.roemah_duren_spring.util.AlertUtil;
-import ac.unindra.roemah_duren_spring.util.FXMLUtil;
-import ac.unindra.roemah_duren_spring.util.NotificationUtil;
-import ac.unindra.roemah_duren_spring.util.TableUtil;
+import ac.unindra.roemah_duren_spring.service.JasperService;
+import ac.unindra.roemah_duren_spring.util.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,12 +18,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
+import org.kordamp.ikonli.material2.Material2MZ;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class BranchController implements Initializable {
     private final BranchService branchService;
+    private final JasperService jasperService;
     public Button buttonModalAdd;
 
     public AnchorPane main;
@@ -36,9 +39,11 @@ public class BranchController implements Initializable {
     public TableColumn<Branch, Void> actionsCol;
     public Pagination pagination;
     public Button searchBtn;
+    public Button printReport;
     public TextField searchField;
 
     public BranchController() {
+        this.jasperService = JavaFxApplication.getBean(JasperService.class);
         this.branchService = JavaFxApplication.getBean(BranchService.class);
     }
 
@@ -52,6 +57,7 @@ public class BranchController implements Initializable {
 
     private void setupButtonIcons() {
         buttonModalAdd.setGraphic(new FontIcon(Material2AL.ADD));
+        printReport.setGraphic(new FontIcon(Material2MZ.PRINT));
     }
 
     private void initTableData() {
@@ -134,5 +140,37 @@ public class BranchController implements Initializable {
             ));
 
         };
+    }
+
+    public void doPrintReport() {
+        List<Map<String, Object>> dataList = new ArrayList<>();
+
+        branchService.getAllBranch(
+                response -> {
+                    if (response.getData().isEmpty()) {
+                        FXMLUtil.updateUI(() -> NotificationUtil.showNotificationError(main, "Data Kosong"));
+                        return;
+                    }
+
+                    int no = 0;
+                    for (Branch branch : response.getData()) {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("no", String.valueOf(++no));
+                        map.put("code", branch.getCode());
+                        map.put("branchName", branch.getName());
+                        map.put("address", branch.getAddress());
+                        map.put("mobilePhoneNo", branch.getMobilePhoneNo());
+                        dataList.add(map);
+                    }
+                },
+                error -> handleErrorResponse(error.getMessage())
+        );
+
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("tanggal", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
+        params.put("tanggalWaktu", DateUtil.strDateTimeFromLocalDateTime(LocalDateTime.now()));
+
+        jasperService.createReport(main, "branch", dataList, params);
     }
 }

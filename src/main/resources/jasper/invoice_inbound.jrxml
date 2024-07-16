@@ -33,6 +33,7 @@
 	<parameter name="KIRIM_KE" class="java.lang.String"/>
 	<parameter name="TANGGAL" class="java.lang.String"/>
 	<parameter name="TOTAL_PRICE" class="java.lang.String"/>
+	<parameter name="TANGGAL_TTD" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -169,13 +170,28 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="146" splitType="Stretch">
+		<band height="210" splitType="Stretch">
 			<textField>
 				<reportElement stretchType="ElementGroupHeight" x="360" y="12" width="175" height="30" uuid="4016a891-ffaa-4558-9548-328dcf36956e"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Total Harga " + $P{TOTAL_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="120" width="264" height="20" uuid="a965bc75-2f89-4932-933c-63b02174062a"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Owner"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="100" width="264" height="20" uuid="de7fb229-b890-4053-9437-2bf309ae2c8c"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Jakarta, " + $P{TANGGAL_TTD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="190" width="264" height="20" uuid="e24c1db0-8d8a-400e-bc42-ba6e107ee038"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Diaz Subagja"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

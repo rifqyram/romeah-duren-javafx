@@ -17,6 +17,10 @@ import java.util.List;
 public class Transaction {
     private StringProperty id = new SimpleStringProperty();
 
+    @Getter
+    @Setter
+    private Admin admin;
+
     @Setter
     @Getter
     private Customer customer;

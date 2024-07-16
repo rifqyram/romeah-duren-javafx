@@ -13,6 +13,10 @@ public class ConstantAPIUrl {
         ConstantAPIUrl.BASE_URL = baseUrl;
     }
 
+    public static class UserAPI {
+        public static final String BASE_URL = "/users";
+    }
+
     public static class AuthAPI {
         public static final String LOGIN = "/auth/login";
         public static final String REGISTER = "/auth/register";

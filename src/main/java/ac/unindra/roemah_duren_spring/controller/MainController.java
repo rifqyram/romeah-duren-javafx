@@ -3,7 +3,9 @@ package ac.unindra.roemah_duren_spring.controller;
 import ac.unindra.roemah_duren_spring.JavaFxApplication;
 import ac.unindra.roemah_duren_spring.constant.ConstantPage;
 import ac.unindra.roemah_duren_spring.repository.TokenManager;
+import ac.unindra.roemah_duren_spring.service.UserService;
 import ac.unindra.roemah_duren_spring.util.FXMLUtil;
+import ac.unindra.roemah_duren_spring.util.NotificationUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -48,12 +50,17 @@ public class MainController implements Initializable {
     public AnchorPane main;
 
     @FXML
+    public Label adminName;
+    @FXML
     public Button navAdmin;
-    private final TokenManager tokenManager;
 
+    private final TokenManager tokenManager;
+    private final UserService userService;
+    public Label roleAdmin;
 
     public MainController() {
         this.tokenManager = JavaFxApplication.getBean(TokenManager.class);
+        this.userService = JavaFxApplication.getBean(UserService.class);
     }
 
     @Override
@@ -67,8 +74,16 @@ public class MainController implements Initializable {
         navTransaction.setGraphic(new FontIcon(Material2AL.ADD_SHOPPING_CART));
         navLogout.setGraphic(new FontIcon(Material2AL.EXIT_TO_APP));
         navAdmin.setGraphic(new FontIcon(Material2MZ.PERSON));
-
         FXMLUtil.updateUI(() -> loadPage(ConstantPage.DASHBOARD));
+
+        userService.getUserInfoByToken(
+                response -> FXMLUtil.updateUI(() -> {
+                    adminName.setText(response.getEmail());
+                    roleAdmin.setText(response.getRoles().get(0));
+                }),
+                error -> FXMLUtil.updateUI(() -> NotificationUtil.showNotificationError(main, error.getMessage()))
+        );
+
     }
 
     @FXML

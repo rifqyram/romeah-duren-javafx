@@ -82,7 +82,8 @@
                                 <TableView fx:id="tableTransaction" prefWidth="528.0" styleClass="edge-to-edge" VBox.vgrow="ALWAYS">
                                     <columns>
                                         <TableColumn fx:id="noCol" prefWidth="40.617191314697266" text="No" />
-                                        <TableColumn fx:id="branchCol" minWidth="0.0" prefWidth="218.5" text="Cabang" />
+                              <TableColumn fx:id="adminCol" minWidth="0.0" prefWidth="163.5" text="Admin" />
+                                        <TableColumn fx:id="branchCol" minWidth="0.0" prefWidth="273.5" text="Cabang" />
                                         <TableColumn fx:id="transDateCol" prefWidth="186.0" text="Tanggal Transaksi" />
                                         <TableColumn fx:id="transTypeCol" prefWidth="146.5" text="Tipe Transaksi" />
                                         <TableColumn fx:id="totalPriceCol" prefWidth="199.0" text="Total Harga" />

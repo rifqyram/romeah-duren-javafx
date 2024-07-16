@@ -5,3 +5,7 @@
 /purchasing_detail.jasper
 /transfer.jasper
 /sub_transfer.jasper
+/invoice_inbound.jasper
+/supplier.jasper
+/product.jasper
+/sub_product.jasper

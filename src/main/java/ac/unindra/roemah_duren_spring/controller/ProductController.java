@@ -4,28 +4,28 @@ import ac.unindra.roemah_duren_spring.JavaFxApplication;
 import ac.unindra.roemah_duren_spring.constant.ConstantPage;
 import ac.unindra.roemah_duren_spring.constant.ResponseMessage;
 import ac.unindra.roemah_duren_spring.dto.request.QueryRequest;
+import ac.unindra.roemah_duren_spring.model.Branch;
 import ac.unindra.roemah_duren_spring.model.Product;
+import ac.unindra.roemah_duren_spring.model.Stock;
 import ac.unindra.roemah_duren_spring.model.Supplier;
+import ac.unindra.roemah_duren_spring.service.JasperService;
 import ac.unindra.roemah_duren_spring.service.ProductService;
-import ac.unindra.roemah_duren_spring.service.SupplierService;
+import ac.unindra.roemah_duren_spring.service.StockService;
 import ac.unindra.roemah_duren_spring.util.TableUtil;
 import ac.unindra.roemah_duren_spring.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Pair;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ProductController implements Initializable {
     public AnchorPane main;
@@ -41,11 +41,16 @@ public class ProductController implements Initializable {
     public TableColumn<Product, Void> actionsCol;
     public Pagination pagination;
     public Button btnOpenModal;
+    public Button printReport;
 
     private final ProductService productService;
+    private final StockService stockService;
+    private final JasperService jasperService;
 
     public ProductController() {
         this.productService = JavaFxApplication.getBean(ProductService.class);
+        this.stockService = JavaFxApplication.getBean(StockService.class);
+        this.jasperService = JavaFxApplication.getBean(JasperService.class);
     }
 
     @Override
@@ -93,7 +98,7 @@ public class ProductController implements Initializable {
                     Product product = table.getItems().get(index);
                     productService.deleteProduct(
                             product.getId(),
-                            response -> handleSuccessResponse(ResponseMessage.SUCCESS_DELETE),
+                            response -> handleSuccessResponse(),
                             error -> handleErrorResponse(error.getMessage())
                     );
                 })
@@ -120,6 +125,7 @@ public class ProductController implements Initializable {
 
     private void setupButtonIcons() {
         btnOpenModal.setGraphic(new FontIcon(Material2AL.ADD));
+        printReport.setGraphic(new FontIcon(Material2MZ.PRINT));
     }
 
     public void openModal() {
@@ -137,12 +143,57 @@ public class ProductController implements Initializable {
         });
     }
 
-    private void handleSuccessResponse(String message) {
-        NotificationUtil.showNotificationSuccess(main, message);
+    private void handleSuccessResponse() {
+        NotificationUtil.showNotificationSuccess(main, ResponseMessage.SUCCESS_DELETE);
         doSearch();
     }
 
     private void handleErrorResponse(String error) {
         NotificationUtil.showNotificationError(main, error);
+    }
+
+    public void doPrintReport() {
+        List<Map<String, Object>> dataList = new ArrayList<>();
+
+        stockService.getAllStocks(
+                response -> {
+                    if (response.getData().isEmpty()) {
+                        FXMLUtil.updateUI(() -> NotificationUtil.showNotificationError(main, "Data Kosong"));
+                        return;
+                    }
+
+                    Map<Branch, List<Stock>> data = response.getData().stream().collect(Collectors.groupingBy(Stock::getBranch));
+
+                    data.forEach((s, stocks) -> {
+                        Map<String, Object> map = new HashMap<>();
+                        List<Map<String, Object>> details = new ArrayList<>();
+
+                        int no = 0;
+                        for (Stock stock : stocks) {
+                            Map<String, Object> detail = new HashMap<>();
+                            detail.put("no", String.valueOf(++no));
+                            detail.put("code", stock.getProduct().getCode());
+                            detail.put("product", stock.getProduct().getName());
+                            detail.put("harga", CurrencyUtil.formatCurrencyIDR(stock.getProduct().getPrice()));
+                            detail.put("stock", String.valueOf(stock.getStock()));
+                            detail.put("supplier", stock.getProduct().getSupplier().getName());
+                            details.add(detail);
+                        }
+
+                        map.put("branch", s.getName());
+                        map.put("details", details);
+                        dataList.add(map);
+                    });
+                },
+                error -> handleErrorResponse(error.getMessage())
+        );
+
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("tanggal", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
+        params.put("tanggalWaktu", DateUtil.strDateTimeFromLocalDateTime(LocalDateTime.now()));
+        params.put("subReport", jasperService.loadReport("sub_product"));
+
+        jasperService.createReport(main, "product", dataList, params);
     }
 }

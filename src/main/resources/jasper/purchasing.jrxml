@@ -9,6 +9,7 @@
 	<field name="branch" class="java.lang.String"/>
 	<field name="totalPerBranch" class="java.lang.String"/>
 	<field name="details" class="java.util.List"/>
+	<field name="kodeTransaksi" class="java.lang.String"/>
 	<group name="BranchGroup"/>
 	<title>
 		<band height="130" splitType="Stretch">
@@ -48,28 +49,36 @@
 		</band>
 	</title>
 	<detail>
-		<band height="68" splitType="Stretch">
+		<band height="82" splitType="Stretch">
 			<subreport>
-				<reportElement x="-20" y="40" width="579" height="20" uuid="cdab3aad-d8b6-4fea-9eb6-ba26e3e61aae"/>
+				<reportElement x="-20" y="60" width="579" height="20" uuid="cdab3aad-d8b6-4fea-9eb6-ba26e3e61aae"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{details})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{subReport}]]></subreportExpression>
 			</subreport>
 			<textField>
-				<reportElement stretchType="RelativeToTallestObject" x="100" y="0" width="170" height="20" uuid="a79b2da6-6693-4ed8-aa91-e4fb84434c76"/>
+				<reportElement stretchType="RelativeToTallestObject" x="100" y="21" width="170" height="20" uuid="a79b2da6-6693-4ed8-aa91-e4fb84434c76"/>
 				<textFieldExpression><![CDATA[": " + $F{branch}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="37fdc903-5e2e-403d-aaca-08e36f8b59ab"/>
+				<reportElement x="0" y="21" width="100" height="20" uuid="37fdc903-5e2e-403d-aaca-08e36f8b59ab"/>
 				<text><![CDATA[Cabang]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="20" width="170" height="20" uuid="794e07d5-9da6-408e-80f0-b5af53660da9"/>
+				<reportElement x="100" y="41" width="170" height="20" uuid="794e07d5-9da6-408e-80f0-b5af53660da9"/>
 				<textFieldExpression><![CDATA[": " + $F{totalPerBranch}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="20" width="100" height="20" uuid="8f713735-7f8e-4e58-b84d-2d5630b6139a"/>
+				<reportElement x="0" y="41" width="100" height="20" uuid="8f713735-7f8e-4e58-b84d-2d5630b6139a"/>
 				<text><![CDATA[Total Per Cabang]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="100" height="20" uuid="454113c7-8247-4266-82d5-ba6d1135564a"/>
+				<text><![CDATA[Kode Transaksi]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="100" y="1" width="170" height="20" uuid="f42dd513-7e2a-4a25-b434-90c9fcf53caa"/>
+				<textFieldExpression><![CDATA[": " + $F{kodeTransaksi}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
@@ -82,11 +91,21 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="104">
+		<band height="156">
 			<textField>
-				<reportElement x="370" y="20" width="164" height="70" uuid="c8cc235c-7532-4a3f-b6c2-16ae9de6bc41"/>
+				<reportElement x="270" y="20" width="264" height="20" uuid="c8cc235c-7532-4a3f-b6c2-16ae9de6bc41"/>
 				<textElement textAlignment="Right" verticalAlignment="Top"/>
-				<textFieldExpression><![CDATA["Jakarta, " + $P{tanggal} + "\n\n\n\nOwner"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Jakarta, " + $P{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="40" width="264" height="20" uuid="c42b7598-f580-40b6-88c8-872081500383"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Owner"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="110" width="264" height="20" uuid="77758440-caf4-45a8-a16c-f89678e1e7de"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Diaz Subagja"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

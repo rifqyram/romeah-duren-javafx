@@ -52,7 +52,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void getAllStocks(QueryRequest request, WebClientUtil.SuccessCallback<Page<Stock>> successCallback, WebClientUtil.ErrorCallback errorCallback) {
+    public void getAllStocks(WebClientUtil.SuccessCallback<Page<Stock>> successCallback, WebClientUtil.ErrorCallback errorCallback) {
         getAll(successCallback, errorCallback, Map.of(
                 "all", "true"
         ));
