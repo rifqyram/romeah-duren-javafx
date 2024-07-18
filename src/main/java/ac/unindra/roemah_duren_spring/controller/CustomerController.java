@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
+import org.springframework.util.StringUtils;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -169,9 +170,9 @@ public class CustomerController implements Initializable {
                         Map<String, Object> map = new HashMap<>();
                         map.put("no", String.valueOf(++no));
                         map.put("customerName", customer.getName());
-                        map.put("address", customer.getAddress());
-                        map.put("email", customer.getEmail());
-                        map.put("mobilePhoneNo", customer.getMobilePhoneNo());
+                        map.put("address", !StringUtils.hasText(customer.getAddress()) ? "-" : customer.getAddress());
+                        map.put("email", !StringUtils.hasText(customer.getEmail()) ? "-" : customer.getEmail());
+                        map.put("mobilePhoneNo", !StringUtils.hasText(customer.getMobilePhoneNo()) ? "-" : "0" + customer.getMobilePhoneNo());
                         dataList.add(map);
                     }
                 },

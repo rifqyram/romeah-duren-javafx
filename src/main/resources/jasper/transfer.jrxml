@@ -9,7 +9,7 @@
 	<field name="branch" class="java.lang.String"/>
 	<field name="details" class="java.util.List"/>
 	<field name="targetBranchName" class="java.lang.String"/>
-	<field name="kodeTransaksi" class="java.util.List"/>
+	<field name="kodeTransaksi" class="java.lang.String"/>
 	<group name="BranchGroup"/>
 	<title>
 		<band height="136" splitType="Stretch">

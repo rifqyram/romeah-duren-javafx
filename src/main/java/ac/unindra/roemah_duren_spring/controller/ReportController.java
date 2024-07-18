@@ -135,8 +135,8 @@ public class ReportController implements Initializable {
 
         Map<String, Object> params = new HashMap<>();
         params.put("rangeTanggal", DateUtil.strDateFromLocalDateTime(startDatePicker.getValue().atTime(LocalTime.MIN)) + " - " + DateUtil.strDateFromLocalDateTime(endDatePicker.getValue().atTime(LocalTime.MAX)));
+        params.put("tanggal", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         params.put("tanggalWaktu", DateUtil.strDateTimeFromLocalDateTime(LocalDateTime.now()));
-        params.put("tanggal", DateUtil.strDateFromLocalDateTime(LocalDateTime.now()));
 
         JasperReport subSales = jasperService.loadReport("sub_transfer");
         params.put("subReport", subSales);
@@ -174,8 +174,8 @@ public class ReportController implements Initializable {
         Map<String, Object> params = new HashMap<>();
         long sum = transactions.stream().mapToLong(transaction -> transaction.getTransactionDetails().stream().mapToLong(transactionDetail -> transactionDetail.getQty() * transactionDetail.getPrice()).sum()).sum();
         params.put("rangeTanggal", DateUtil.strDateFromLocalDateTime(startDatePicker.getValue().atTime(LocalTime.MIN)) + " - " + DateUtil.strDateFromLocalDateTime(endDatePicker.getValue().atTime(LocalTime.MAX)));
+        params.put("tanggal", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         params.put("tanggalWaktu", DateUtil.strDateTimeFromLocalDateTime(LocalDateTime.now()));
-        params.put("tanggal", DateUtil.strDateFromLocalDateTime(LocalDateTime.now()));
         params.put("grandTotal", CurrencyUtil.formatCurrencyIDR(sum));
 
         JasperReport subSales = jasperService.loadReport("sub_sales");
@@ -214,8 +214,8 @@ public class ReportController implements Initializable {
         Map<String, Object> params = new HashMap<>();
         long sum = transactions.stream().mapToLong(transaction -> transaction.getTransactionDetails().stream().mapToLong(transactionDetail -> transactionDetail.getQty() * transactionDetail.getPrice()).sum()).sum();
         params.put("rangeTanggal", DateUtil.strDateFromLocalDateTime(startDatePicker.getValue().atTime(LocalTime.MIN)) + " - " + DateUtil.strDateFromLocalDateTime(endDatePicker.getValue().atTime(LocalTime.MAX)));
+        params.put("tanggal", DateUtil.strDayDateFromLocalDateTime(LocalDateTime.now()));
         params.put("tanggalWaktu", DateUtil.strDateTimeFromLocalDateTime(LocalDateTime.now()));
-        params.put("tanggal", DateUtil.strDateFromLocalDateTime(LocalDateTime.now()));
         params.put("grandTotal", CurrencyUtil.formatCurrencyIDR(sum));
 
         JasperReport subSales = jasperService.loadReport("purchasing_detail");
