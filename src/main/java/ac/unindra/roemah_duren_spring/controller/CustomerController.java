@@ -85,7 +85,7 @@ public class CustomerController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.CUSTOMER_FORM, "Form Customer", false, (CustomerFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.CUSTOMER_FORM, "Form Customer", true, (CustomerFormController controller) -> {
             controller.setOnFormSubmit(this::doSearch);
             controller.setOwnerPane(main);
         });
@@ -147,7 +147,7 @@ public class CustomerController implements Initializable {
     private TableUtil.TableAction<TableView<Customer>, Integer> processUpdate() {
         return (table, index) -> {
             Customer customer = table.getItems().get(index);
-            FXMLUtil.openModal(main, ConstantPage.CUSTOMER_FORM, "Form Customer", false, (CustomerFormController controller) -> {
+            FXMLUtil.openModal(main, ConstantPage.CUSTOMER_FORM, "Form Customer", true, (CustomerFormController controller) -> {
                 controller.updateForm(customer);
                 controller.setOwnerPane(main);
                 controller.setOnFormSubmit(this::doSearch);

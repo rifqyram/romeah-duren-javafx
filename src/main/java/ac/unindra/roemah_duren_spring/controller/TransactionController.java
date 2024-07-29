@@ -88,7 +88,7 @@ public class TransactionController implements Initializable {
                                 main,
                                 ConstantPage.TRANSACTION_DETAIL,
                                 "Detail Transaksi",
-                                false,
+                                true,
                                 (TransactionDetailController controller) -> controller.setSelectedTransaction(table.getItems().get(index))
                         )
                 )
@@ -96,7 +96,7 @@ public class TransactionController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.TRANSACTION_FORM, "Tambah Transaksi", false, (TransactionFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.TRANSACTION_FORM, "Tambah Transaksi", true, (TransactionFormController controller) -> {
             controller.setOwnerPane(main);
             controller.setOnSubmitForm(this::doSearch);
         });
@@ -147,6 +147,6 @@ public class TransactionController implements Initializable {
     }
 
     public void openModalPrint() {
-        FXMLUtil.openModal(main, ConstantPage.TRANSACTION_REPORT, "Laporan Transaksi", false, (ReportController controller) -> controller.setOwnerPane(main));
+        FXMLUtil.openModal(main, ConstantPage.TRANSACTION_REPORT, "Laporan Transaksi", true, (ReportController controller) -> controller.setOwnerPane(main));
     }
 }

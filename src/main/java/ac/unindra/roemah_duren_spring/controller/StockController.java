@@ -123,7 +123,7 @@ public class StockController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.STOCK_FORM, "Form Tambah Stock", false, (StockFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.STOCK_FORM, "Form Tambah Stock", true, (StockFormController controller) -> {
             controller.setOwnerPane(main);
             controller.setOnFormSubmit(this::doSearch);
         });
@@ -136,7 +136,7 @@ public class StockController implements Initializable {
     private TableUtil.TableAction<TableView<Stock>, Integer> processUpdate() {
         return (table, index) -> {
             Stock stock = table.getItems().get(index);
-            FXMLUtil.openModal(main, ConstantPage.STOCK_FORM, "Form Ubah Stock", false, (StockFormController controller) -> {
+            FXMLUtil.openModal(main, ConstantPage.STOCK_FORM, "Form Ubah Stock", true, (StockFormController controller) -> {
                 controller.updateForm(stock);
                 controller.setOwnerPane(main);
                 controller.setOnFormSubmit(this::doSearch);

@@ -96,7 +96,7 @@ public class AdminController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.ADMIN_FORM, "Tambah Admin", false, (AdminFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.ADMIN_FORM, "Tambah Admin", true, (AdminFormController controller) -> {
             controller.setOwnerPane(main);
             controller.setOnSubmitForm(this::doSearch);
         });
@@ -135,7 +135,7 @@ public class AdminController implements Initializable {
     }
 
     private TableUtil.TableAction<TableView<Admin>, Integer> processUpdate() {
-        return (table, index) -> FXMLUtil.openModal(main, ConstantPage.ADMIN_FORM, "Ubah Admin", false, (AdminFormController controller) -> {
+        return (table, index) -> FXMLUtil.openModal(main, ConstantPage.ADMIN_FORM, "Ubah Admin", true, (AdminFormController controller) -> {
             controller.updateForm(table.getItems().get(index));
             controller.setOwnerPane(main);
             controller.setOnSubmitForm(this::doSearch);

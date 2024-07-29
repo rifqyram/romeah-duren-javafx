@@ -4,12 +4,11 @@ import ac.unindra.roemah_duren_spring.JavaFxApplication;
 import ac.unindra.roemah_duren_spring.constant.ConstantPage;
 import ac.unindra.roemah_duren_spring.dto.request.QueryRequest;
 import ac.unindra.roemah_duren_spring.model.Branch;
-import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.BranchService;
 import ac.unindra.roemah_duren_spring.service.JasperService;
 import ac.unindra.roemah_duren_spring.service.UserService;
+import ac.unindra.roemah_duren_spring.util.TableUtil;
 import ac.unindra.roemah_duren_spring.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -127,7 +126,7 @@ public class BranchController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.BRANCH_FORM, "Form Branch", false, (BranchFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.BRANCH_FORM, "Form Branch", true, (BranchFormController controller) -> {
             controller.setOnFormSubmit(this::doSearch);
             controller.setOwnerPane(main);
         });
@@ -136,7 +135,7 @@ public class BranchController implements Initializable {
     private TableUtil.TableAction<TableView<Branch>, Integer> processUpdate() {
         return (table, index) -> {
             Branch branch = table.getItems().get(index);
-            FXMLUtil.openModal(main, ConstantPage.BRANCH_FORM, "Form Branch", false, (BranchFormController controller) -> {
+            FXMLUtil.openModal(main, ConstantPage.BRANCH_FORM, "Form Branch", true, (BranchFormController controller) -> {
                 controller.updateForm(branch);
                 controller.setOwnerPane(main);
                 controller.setOnFormSubmit(this::doSearch);

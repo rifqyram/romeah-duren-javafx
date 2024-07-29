@@ -102,7 +102,7 @@ public class ProductController implements Initializable {
         supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
         supplierCol.setCellFactory(col -> TableUtil.setTableObject(Supplier::getName));
         actionsCol.setCellFactory(col -> TableUtil.setTableActions(
-                (table, index) -> FXMLUtil.openModal(main, ConstantPage.PRODUCT_FORM, "Ubah Barang", false, (ProductFormController controller) -> {
+                (table, index) -> FXMLUtil.openModal(main, ConstantPage.PRODUCT_FORM, "Ubah Barang", true, (ProductFormController controller) -> {
                     controller.updateForm(table.getItems().get(index));
                     controller.setOwnerPane(main);
                     controller.setOnSubmit(this::doSearch);
@@ -142,7 +142,7 @@ public class ProductController implements Initializable {
     }
 
     public void openModal() {
-        FXMLUtil.openModal(main, ConstantPage.PRODUCT_FORM, "Tambah Barang", false, (ProductFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.PRODUCT_FORM, "Tambah Barang", true, (ProductFormController controller) -> {
             controller.setOnSubmit(this::doSearch);
             controller.setOwnerPane(main);
         });

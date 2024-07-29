@@ -8,8 +8,8 @@ import ac.unindra.roemah_duren_spring.model.Supplier;
 import ac.unindra.roemah_duren_spring.service.JasperService;
 import ac.unindra.roemah_duren_spring.service.SupplierService;
 import ac.unindra.roemah_duren_spring.service.UserService;
+import ac.unindra.roemah_duren_spring.util.TableUtil;
 import ac.unindra.roemah_duren_spring.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -131,7 +131,7 @@ public class SupplierController implements Initializable {
     }
 
     public void openModalAdd() {
-        FXMLUtil.openModal(main, ConstantPage.SUPPLIER_FORM, "Tambah Supplier", false, (SupplierFormController controller) -> {
+        FXMLUtil.openModal(main, ConstantPage.SUPPLIER_FORM, "Tambah Supplier", true, (SupplierFormController controller) -> {
             controller.setOnFormSubmit(this::doSearch);
             controller.setOwnerPane(main);
         });
@@ -152,7 +152,7 @@ public class SupplierController implements Initializable {
     private TableUtil.TableAction<TableView<Supplier>, Integer> processUpdate() {
         return (table, index) -> {
             Supplier supplier = table.getItems().get(index);
-            FXMLUtil.openModal(main, ConstantPage.SUPPLIER_FORM, "Tambah Supplier", false, (SupplierFormController controller) -> {
+            FXMLUtil.openModal(main, ConstantPage.SUPPLIER_FORM, "Tambah Supplier", true, (SupplierFormController controller) -> {
                 controller.updateForm(supplier);
                 controller.setOnFormSubmit(this::doSearch);
                 controller.setOwnerPane(main);

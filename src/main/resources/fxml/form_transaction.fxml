@@ -18,10 +18,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.unindra.roemah_duren_spring.controller.TransactionFormController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefHeight="580.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.unindra.roemah_duren_spring.controller.TransactionFormController">
    <content>
-      <AnchorPane fx:id="main">
-            <VBox prefHeight="965.0" prefWidth="731.0">
+      <AnchorPane fx:id="main" prefHeight="965.0" prefWidth="733.0">
+            <VBox prefHeight="965.0" prefWidth="731.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <padding>
                     <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                 </padding>
